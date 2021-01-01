@@ -2,3 +2,6 @@ sudo: false
 language: ruby
 rvm:
   - 2.3.3
+before_install:
+  - gem install -v 2.1.2 bundler --no-rdoc --no-ri
+  - bundle _2.1.2_ install
