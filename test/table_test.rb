@@ -126,6 +126,35 @@ class TableTest < Minitest::Test
     assert_equal "testest", record["Name"]
   end
 
+
+  def test_update_method_changes_value
+    record = first_record
+    record.update("Name": "testest")
+    assert_equal "testest", record["Name"]
+  end
+
+  def test_update_method_with_hash_changes_value
+    record = first_record
+    record.update({"Name": "testest", "Email": "test@email.com"})
+    assert_equal "testest", record["Name"]
+    assert_equal "test@email.com", record["Email"]
+  end
+
+  def test_update_method_changes_value_and_updates
+    record = first_record
+    record.update({"Name": "testest"})
+    stub_patch_request(record, ["Name"])
+    assert record.save
+  end
+
+  def test_update_method_with_hash_changes_value_and_updates
+    record = first_record
+    record.update({"Name": "testest", "Email": "test@email.com"})
+    stub_patch_request(record, ["Name", "Email"])
+    assert record.save
+  end
+
+
   def test_change_value_and_update
     record = first_record
 

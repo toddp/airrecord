@@ -129,6 +129,18 @@ module Airrecord
       fields[key] = value
     end
 
+    def update(fields={})
+      fields.each do |key,value|
+        self[key.to_s]= value
+      end
+    end
+
+    def update!(fields={})
+      update(fields)
+      save
+    end
+
+
     def create(options={})
       raise Error, "Record already exists (record has an id)" unless new_record?
 
